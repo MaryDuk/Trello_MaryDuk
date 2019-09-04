@@ -12,15 +12,6 @@ public class BoardCreationTests extends TestBase{
         createBoard("First Board");
     }
 
-    public  boolean isUserLoggedIn() {
-        return isElementPresent(By.cssSelector("[data-test-id='header-member-menu-button']"));
-
-    }
-
-    public boolean isElementPresent (By locator) {
-        return driver.findElements(locator).size()>0;
-    }
-
     public void createBoard (String title) throws InterruptedException {
         click(By.cssSelector("[class='board-tile mod-add']"));
         type(By.cssSelector("[placeholder='Add board title']"),title);

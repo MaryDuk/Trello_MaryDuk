@@ -12,13 +12,4 @@ public class TeamCreationTests extends TestBase {
 
     }
 
-    public  boolean isUserLoggedIn() {
-        return isElementPresent(By.cssSelector("[data-test-id='header-member-menu-button']"));
-
-    }
-
-    public boolean isElementPresent (By locator) {
-        return driver.findElements(locator).size()>0;
-    }
-
 }

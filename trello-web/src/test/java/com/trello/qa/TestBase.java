@@ -23,6 +23,7 @@ public void setUp(){
     login("m.duksaite@gmail.com","trusty07");
 
 
+
 }
 
     public void login(String email, String password) {
@@ -44,9 +45,17 @@ public void setUp(){
 
     }
 
-
     public void openSite(String url) {
     driver.get(url);
+    }
+
+    public  boolean isUserLoggedIn() {
+        return isElementPresent(By.cssSelector("[data-test-id='header-member-menu-button']"));
+
+    }
+
+    public boolean isElementPresent (By locator) {
+        return driver.findElements(locator).size()>0;
     }
 
     @AfterClass
@@ -54,5 +63,6 @@ public void tearDown (){
     driver.quit();
 
 }
+
 
 }

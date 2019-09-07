@@ -7,7 +7,9 @@ import org.testng.annotations.Test;
 public class TeamCreationTests extends  TestBase{
     @Test
     public void testTeamCreationFromPlusButtonOnHeader() throws InterruptedException {
+        Thread.sleep(10000);
         int before = getTeamsCount();
+        System.out.println(before);
         clickOnPlusButtonOnHeader();
         selectCreateTeamFromDropDown();
         String teamName = "qa21";
@@ -16,12 +18,14 @@ public class TeamCreationTests extends  TestBase{
         String createdTeamName = getTeamNameFromTeamPage();
         returnToHomePage();
         int after = getTeamsCount();
-        //Assert.assertEquals(after, before+1);
+        System.out.println(after);
+        Assert.assertEquals(after, before+1);
         Assert.assertEquals(createdTeamName.toLowerCase(), teamName.toLowerCase());
     }
 
     @Test
     public void testTeamCreationFromLeftNavMenu() throws InterruptedException {
+        Thread.sleep(10000);
         int before = getTeamsCount();
         clickOnPlusButtonOnLeftNavMenu();
         fillTeamCreationForm("h", "g");

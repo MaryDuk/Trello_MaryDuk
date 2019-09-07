@@ -7,19 +7,35 @@ import org.testng.annotations.Test;
 public class BoardCreationTests extends TestBase{
 
     @Test
-    public void testTeamCreation() throws InterruptedException {
-        Assert.assertTrue(isUserLoggedIn());
-        createBoard("First Board");
+    public void testBoardCreationByClickingOnCreateNewBoardButton() throws InterruptedException {
+        //Assert.assertTrue(isUserLoggedIn());
+        int before = getBoardsCount();
+        createBoardGreyButton("First Board");
+        confirmBoardCreationByClickingOnCreateNewBoardButton();
+        returnToHomePage();
+        Thread.sleep(3000);
+        int after = getBoardsCount();
+        Assert.assertEquals(after, before+1);
+        boolean isPresent = findWebElementByText("First Board");
+        Assert.assertEquals(isPresent, true);
     }
 
-    public void createBoard (String title) throws InterruptedException {
-        click(By.cssSelector("[class='board-tile mod-add']"));
-        type(By.cssSelector("[placeholder='Add board title']"),title);
-        click(By.cssSelector("[class='icon-sm icon-overflow-menu-horizontal']"));
-        click(By.xpath("//li[5]//div[1]//div[1]"));
-        click(By.xpath("//span[@class='icon-sm icon-down subtle-chooser-trigger-dropdown-icon light']"));
-        click(By.xpath("//span[contains(text(),'Private')]"));
-        click(By.xpath("//span[contains(text(),'Create Board')]"));
-        Thread.sleep(5000);
+    @Test
+    public void testBoardCreationByClickingOnPlusOnHeaderRight() throws InterruptedException {
+        int before = getBoardsCount();
+        clickOnPlusButtonOnHeader();
+        selectCreateBoardFromDropDown();
+        fillBoardCreationForm("qa21");
+        confirmBoardCreationByClickingOnPlusOnHeaderRight();
+        returnToHomePage();
+        Thread.sleep(3000);
+        int after = getBoardsCount();
+        Assert.assertEquals(after, before+1);
+        boolean isPresent = findWebElementByText("qa21");
+        Assert.assertEquals(isPresent, true);
     }
+
+
+
+
 }

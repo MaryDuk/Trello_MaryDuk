@@ -13,7 +13,7 @@ public class BoardDeletionTests extends TestBase{
 
     clickOnFirstPrivateBoard();
     clickOnMoreButtonInBoardMenu();
-   // initCloseBoard();
+   // initCloseBoard(); // it's simple click on link Close board
 
     int after = getPersonalBoardsCount();
 
@@ -22,6 +22,7 @@ public class BoardDeletionTests extends TestBase{
     public void clickOnMoreButtonInBoardMenu() {
             WebElement menuButton = driver.findElement(By.cssSelector(".board-header-btn.mod-show-menu"));
             System.out.println(menuButton.getCssValue("visibility"));
+        //if(menuButton.getAttribute("class").equals(""to write here what's in "" in that class"")
             if(menuButton.getCssValue("visibility").equals("visible")){
                 click(By.cssSelector(".mod-show-menu"));
                 click(By.cssSelector(".js-open-more"));

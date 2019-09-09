@@ -2,9 +2,31 @@ package com.trello.qa;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TeamCreationTests extends  TestBase{
+    @BeforeClass
+    public void ensurePreconditionsLogin(){
+        if(!isUserLoggedIn()){
+            login("m.duksaite@gmail.com","trusty07");
+        }
+    }
+
+    @BeforeMethod
+    public void isOnHomePage () {
+        if (!isTherePersonalBoards()) //checking that the element not present on homepage, then only return to homepage
+        {
+            returnToHomePage();
+        }
+    }
+
+    public boolean isTherePersonalBoards() {
+        return isElementPresent(By.xpath("//*[@class='icon-lg icon-member']/../../.."));
+    }
+
     @Test
     public void testTeamCreationFromPlusButtonOnHeader() throws InterruptedException {
         int before = getTeamsCount();
@@ -33,12 +55,12 @@ public class TeamCreationTests extends  TestBase{
         clickOnPlusButtonOnLeftNavMenu();
         fillTeamCreationForm("h", "g");
         clickContinueButton();
-        String createdTeamName = getTeamNameFromTeamPage();
+        //String createdTeamName = getTeamNameFromTeamPage();
         returnToHomePage();
         int after = getTeamsCount();
 
         Assert.assertEquals(after, before+1);
-        Assert.assertEquals(createdTeamName, "h");
+        //Assert.assertEquals(createdTeamName, "h");
     }
 
     public void clickOnPlusButtonOnLeftNavMenu() {
@@ -49,13 +71,11 @@ public class TeamCreationTests extends  TestBase{
     public void testTeamCuncellCreationFromPlusButtonOnHeader(){
         clickOnPlusButtonOnHeader();
         selectCreateTeamFromDropDown();
+        String teamName = "qa21-" + System.currentTimeMillis();
         fillTeamCreationForm("qa21", "descr qa 21");
         clickXButton();
         //Assert
-
-
         Assert.assertTrue(isUserLoggedIn());
     }
-
 
 }

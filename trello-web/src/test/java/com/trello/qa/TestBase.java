@@ -3,6 +3,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
@@ -96,20 +99,25 @@ public void tearDown (){
     }
 
     protected String getTeamNameFromTeamPage() {
+        new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h1")));
 
         return driver.findElement(By.cssSelector("h1")).getText();
     }
 
-    public void returnToHomePage() throws InterruptedException {
-        Thread.sleep(10000);
-        click(By.cssSelector("a[aria-label='Back to Home']"));
-        click(By.cssSelector("a[aria-label='Back to Home']"));
-    }
+    public void returnToHomePage() {
+        if(isElementPresent(By.cssSelector("._3gUubwRZDWaOF0._2WhIqhRFBTG7Ry._2NubQcQM83YCVV"))){
+            new WebDriverWait(driver, 15).until(ExpectedConditions.stalenessOf(driver.findElement(By.cssSelector("._3gUubwRZDWaOF0._2WhIqhRFBTG7Ry._2NubQcQM83YCVV")))); // stalenessOf - dissapears
+            click(By.cssSelector("a[href='/']"));
+            click(By.cssSelector("a[href='/']"));
+        } else
+            click(By.cssSelector("a[href='/']"));
+    } //waiting while the blocking element disapears and we can click on home button
 
-    public int getTeamsCount() throws InterruptedException {
-        Thread.sleep(5000);
+    public int getTeamsCount() {
+
+        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")));
             return driver.findElements(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")).size();
-        }
+        } //checking that the element is present block of teams
 
 
     public void clickXButton() {

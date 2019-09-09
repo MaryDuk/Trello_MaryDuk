@@ -106,7 +106,8 @@ public void tearDown (){
         click(By.cssSelector("a[aria-label='Back to Home']"));
     }
 
-    public int getTeamsCount() {
+    public int getTeamsCount() throws InterruptedException {
+        Thread.sleep(5000);
             return driver.findElements(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")).size();
         }
 //

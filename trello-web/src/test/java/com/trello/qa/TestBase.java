@@ -110,30 +110,27 @@ public void tearDown (){
         Thread.sleep(5000);
             return driver.findElements(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")).size();
         }
-//
-//     public int getTeamsCount1(){
-//    return.driver.findElements(By.xpath(""));
 
-//     }
 
     public void clickXButton() {
 
     }
 
-    public void createBoardGreyButton (String boardTitle) {
+    public void createBoardGreyButton (String boardTitle) throws InterruptedException {
         click(By.cssSelector("[class='board-tile mod-add']"));
         type(By.cssSelector("[placeholder='Add board title']"),boardTitle);
         click(By.cssSelector("[class='icon-sm icon-overflow-menu-horizontal']"));
         click(By.xpath("//li[5]//div[1]//div[1]"));
         click(By.xpath("//span[@class='icon-sm icon-down subtle-chooser-trigger-dropdown-icon light']"));
-        click(By.xpath("//span[contains(text(),'Private')]"));
+        click(By.xpath("//span[contains(text(),'No team')]"));
+        //click(By.xpath("//span[contains(text(),'Private')]"));
     }
 
     public List<WebElement> getList(String selector){
         return driver.findElements(By.xpath(selector));
     }
 
-    public int getBoardsCount (){
+    public int getPersonalBoardsCount (){
     return driver.findElements(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li")).size() -1;
     }
 

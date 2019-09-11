@@ -2,9 +2,27 @@ package com.trello.qa;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class BoardCreationTests extends TestBase{
+
+    @BeforeClass
+    public void ensurePreconditionsLogin(){
+        if(!isUserLoggedIn()){
+            login("m.duksaite@gmail.com","trusty07");
+        }
+    }
+
+    @BeforeMethod
+    public void isOnHomePage () {
+        if (!isTherePersonalBoards())
+        {
+            returnToHomePage();
+        }
+    }
 
     @Test
     public void testBoardCreationByClickingOnCreateNewBoardButton() throws InterruptedException {
@@ -13,7 +31,6 @@ public class BoardCreationTests extends TestBase{
         createBoardGreyButton("First Board");
         confirmBoardCreationByClickingOnCreateNewBoardButton();
         returnToHomePage();
-        Thread.sleep(3000);
         int after = getPersonalBoardsCount();
         Assert.assertEquals(after, before+1);
         boolean isPresent = findWebElementByText("First Board");
@@ -21,21 +38,21 @@ public class BoardCreationTests extends TestBase{
     }
 
     @Test
-    public void testBoardCreationByClickingOnPlusOnHeaderRight() throws InterruptedException {
+    public void testBoardCreationByClickingOnPlusOnHeaderRight() {
         int before = getPersonalBoardsCount();
         clickOnPlusButtonOnHeader();
         selectCreateBoardFromDropDown();
         fillBoardCreationForm("qa21");
         confirmBoardCreationByClickingOnPlusOnHeaderRight();
         returnToHomePage();
-        Thread.sleep(3000);
         int after = getPersonalBoardsCount();
         Assert.assertEquals(after, before+1);
         boolean isPresent = findWebElementByText("qa21");
         Assert.assertEquals(isPresent, true);
     }
-
-
-
+    @AfterClass
+    public void deleteExtraBoards (){
+        deleteBoardsInCycle();
+}
 
 }

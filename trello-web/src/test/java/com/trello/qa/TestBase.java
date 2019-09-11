@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +18,7 @@ WebDriver driver;
 @BeforeClass
 public void setUp(){
     driver = new ChromeDriver();
-    driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(60,TimeUnit.SECONDS);
     driver.manage().window().maximize();
     openSite("https://trello.com");
     login("m.duksaite@gmail.com","trusty07");
@@ -99,23 +100,24 @@ public void tearDown (){
     }
 
     protected String getTeamNameFromTeamPage() {
-        new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h1")));
+        new WebDriverWait(driver, 20).until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("h1")));
 
         return driver.findElement(By.cssSelector("h1")).getText();
     }
 
     public void returnToHomePage() {
         if(isElementPresent(By.cssSelector("._3gUubwRZDWaOF0._2WhIqhRFBTG7Ry._2NubQcQM83YCVV"))){
-            new WebDriverWait(driver, 15).until(ExpectedConditions.stalenessOf(driver.findElement(By.cssSelector("._3gUubwRZDWaOF0._2WhIqhRFBTG7Ry._2NubQcQM83YCVV")))); // stalenessOf - dissapears
+            new WebDriverWait(driver, 20).until(ExpectedConditions.stalenessOf(driver.findElement(By.cssSelector("._3gUubwRZDWaOF0._2WhIqhRFBTG7Ry._2NubQcQM83YCVV")))); // stalenessOf - dissapears
             click(By.cssSelector("a[href='/']"));
             click(By.cssSelector("a[href='/']"));
         } else
+            click(By.cssSelector("a[href='/']"));
             click(By.cssSelector("a[href='/']"));
     } //waiting while the blocking element disapears and we can click on home button
 
     public int getTeamsCount() {
 
-        new WebDriverWait(driver,10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")));
+        new WebDriverWait(driver,20).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")));
             return driver.findElements(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")).size();
         } //checking that the element is present block of teams
 
@@ -123,12 +125,11 @@ public void tearDown (){
     public void clickXButton() {
 
     }
-
     public void createBoardGreyButton (String boardTitle) throws InterruptedException {
-        click(By.cssSelector("[class='board-tile mod-add']"));
+        click(By.xpath("//*[@class='icon-lg icon-member']/../../..//span[contains(text(),'Create new board')]"));
         type(By.cssSelector("[placeholder='Add board title']"),boardTitle);
         click(By.cssSelector("[class='icon-sm icon-overflow-menu-horizontal']"));
-        click(By.xpath("//li[5]//div[1]//div[1]"));
+        //click(By.xpath("//li[5]//div[1]//div[1]"));
         click(By.xpath("//span[@class='icon-sm icon-down subtle-chooser-trigger-dropdown-icon light']"));
         click(By.xpath("//span[contains(text(),'No team')]"));
         //click(By.xpath("//span[contains(text(),'Private')]"));
@@ -138,8 +139,9 @@ public void tearDown (){
         return driver.findElements(By.xpath(selector));
     }
 
-    public int getPersonalBoardsCount (){
-    return driver.findElements(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li")).size() -1;
+    public int getPersonalBoardsCount ()  {
+    //new WebDriverWait(driver,20).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li")));
+    return driver.findElements(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li")).size()-1;
     }
 
 
@@ -153,7 +155,79 @@ public void tearDown (){
     }
 
 
+    public boolean isTherePersonalBoards() {
+        return isElementPresent(By.xpath("//*[@class='icon-lg icon-member']/../../.."));
+    }
+
+    public void refreshPage() {
+        driver.navigate().refresh();
+    }
+
+    public void clickOnPlusButtonOnLeftNavMenu() {
+        click(By.cssSelector(".icon-add.icon-sm"));
+    }
+
+    public void deleteTeam() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.cssSelector(".quiet-button")));
+        click(By.cssSelector(".quiet-button"));
+        click(By.cssSelector(".js-confirm.full.negate"));
+    }
+
+    public void openSettings() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Settings')]")));
+        //click(By.cssSelector(".icon-gear.icon-sm.OiX3P2i2J92XatType a message here"));
+        click(By.xpath("//span[contains(text(),'Settings')]"));
+    }
+
+    public void clickOnFirstTeam() {
+        click(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")); // clicks on first element
+    }
+
+    public void confirmDeleteBoard() {
+        click(By.xpath("//input[@class='js-confirm full negate']"));
+    }
+
+    public void initPermanentlyDeleteBoard() {
+        click(By.xpath("//a[@class='quiet js-delete']"));
+    }
+
+    public void confirmCloseBoard() {
+        click(By.cssSelector("[class='js-confirm full negate']"));
+    }
+
+    public void initCloseBoard() {
+        click(By.cssSelector("[class='board-menu-navigation-item-link js-close-board']"));
+    }
+
+    public void clickOnMoreButtonInBoardMenu() {
+            WebElement menuButton = driver.findElement(By.cssSelector(".board-header-btn.mod-show-menu"));
+            System.out.println(menuButton.getCssValue("visibility"));
+        //if(menuButton.getAttribute("class").equals(""value of the class"")
+            if(menuButton.getCssValue("visibility").equals("visible")){
+                click(By.cssSelector(".mod-show-menu"));
+                click(By.cssSelector(".js-open-more"));
+            } else{
+                click(By.cssSelector(".js-open-more"));
+            }
+    }
+
+    public void clickOnFirstPrivateBoard() {
+       click(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li"));
+    }
+
+    public void deleteBoardsInCycle (){
+        int before = getPersonalBoardsCount();
+        while (before>3){
+            clickOnFirstPrivateBoard();
+            clickOnMoreButtonInBoardMenu();
+            initCloseBoard();
+            confirmCloseBoard();
+            initPermanentlyDeleteBoard();
+            confirmDeleteBoard();
+            returnToHomePage();
+            before = getPersonalBoardsCount();
+        }
 
 
-
+    }
 }

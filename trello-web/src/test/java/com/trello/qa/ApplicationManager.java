@@ -123,7 +123,7 @@ public class ApplicationManager {
 
     }
 
-    public void createBoardGreyButton (String boardTitle) throws InterruptedException {
+    public void createBoardGreyButton (String boardTitle) {
         click(By.xpath("//*[@class='icon-lg icon-member']/../../..//span[contains(text(),'Create new board')]"));
         type(By.cssSelector("[placeholder='Add board title']"),boardTitle);
         click(By.cssSelector("[class='icon-sm icon-overflow-menu-horizontal']"));

@@ -49,7 +49,7 @@ public class BoardCreationTests extends TestBase{
         boolean isPresent = app.findWebElementByText("Beutiful");
         Assert.assertEquals(isPresent, true);
     }
-    @Test
+    @AfterClass
     public void deleteExtraBoardsTillThreeLeft (){
         app.deleteBoardsInCycle();
 }

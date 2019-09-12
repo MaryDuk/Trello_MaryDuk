@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -137,7 +138,7 @@ public class ApplicationManager {
     }
 
     public int getPersonalBoardsCount ()  {
-    //new WebDriverWait(driver,20).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li")));
+    new WebDriverWait(driver,20).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li")));
     return driver.findElements(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li")).size()-1;
     }
 
@@ -213,17 +214,18 @@ public class ApplicationManager {
 
     public void deleteBoardsInCycle (){
         int before = getPersonalBoardsCount();
-        while (before>3){
-            clickOnFirstPrivateBoard();
-            clickOnMoreButtonInBoardMenu();
-            initCloseBoard();
-            confirmCloseBoard();
-            initPermanentlyDeleteBoard(); // check locator
-            confirmDeleteBoard();
-            returnToHomePage();
-            before = getPersonalBoardsCount();
+        if (before >=4) {
+            while (before > 3) {
+               clickOnFirstPrivateBoard();
+                clickOnMoreButtonInBoardMenu();
+                initCloseBoard();
+                confirmCloseBoard();
+                initPermanentlyDeleteBoard(); // check locator
+                confirmDeleteBoard();
+                returnToHomePage();
+                before = getPersonalBoardsCount();
+           }
         }
-
 
     }
 

@@ -116,7 +116,8 @@ public class ApplicationManager {
     public int getTeamsCount() {
 
         new WebDriverWait(driver,20).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")));
-            return driver.findElements(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")).size();
+            return driver.findElements(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")).size()-1;
+
         } //checking that the element is present block of teams
 
     public void clickXButton() {
@@ -127,9 +128,13 @@ public class ApplicationManager {
         click(By.xpath("//*[@class='icon-lg icon-member']/../../..//span[contains(text(),'Create new board')]"));
         type(By.cssSelector("[placeholder='Add board title']"),boardTitle);
         click(By.cssSelector("[class='icon-sm icon-overflow-menu-horizontal']"));
+        int teams = getTeamsCount();
+        System.out.println(teams);
         //click(By.xpath("//li[5]//div[1]//div[1]"));
-        click(By.xpath("//span[@class='icon-sm icon-down subtle-chooser-trigger-dropdown-icon light']"));
-        click(By.xpath("//span[contains(text(),'No team')]"));
+        if (getTeamsCount()>0) {
+            click(By.xpath("//span[@class='icon-sm icon-down subtle-chooser-trigger-dropdown-icon light']"));
+            click(By.xpath("//span[contains(text(),'No team')]"));
+        }
         //click(By.xpath("//span[contains(text(),'Private')]"));
     }
 
@@ -170,9 +175,9 @@ public class ApplicationManager {
     }
 
     public void openSettings() {
-        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Settings')]")));
-        //click(By.cssSelector(".icon-gear.icon-sm.OiX3P2i2J92XatType a message here"));
-        click(By.xpath("//span[contains(text(),'Settings')]"));
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath(".icon-gear.icon-sm.OiX3P2i2J92XatType a message her")));
+        click(By.cssSelector(".icon-gear.icon-sm.OiX3P2i2J92XatType a message here"));
+        //click(By.xpath("//span[contains(text(),'Settings')]"));
     }
 
     public void clickOnFirstTeam() {
@@ -209,6 +214,7 @@ public class ApplicationManager {
 
     public void clickOnFirstPrivateBoard() {
        //click(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li"));
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='icon-lg icon-member']/../../..//li")));
         click(By.xpath("//*[@class='icon-lg icon-member']/../../..//li"));
     }
 

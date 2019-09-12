@@ -1,6 +1,7 @@
 package com.trello.qa;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,12 +27,12 @@ public class BoardCreationTests extends TestBase{
     public void testBoardCreationByClickingOnCreateNewBoardButton() throws InterruptedException {
         //Assert.assertTrue(isUserLoggedIn());
         int before = app.getPersonalBoardsCount();
-        app.createBoardGreyButton("First Board");
+        app.createBoardGreyButton("Nice");
         app.confirmBoardCreationByClickingOnCreateNewBoardButton();
         app.returnToHomePage();
         int after = app.getPersonalBoardsCount();
         Assert.assertEquals(after, before+1);
-        boolean isPresent = app.findWebElementByText("First Board");
+        boolean isPresent = app.findWebElementByText("Nice");
         Assert.assertEquals(isPresent, true);
     }
 
@@ -40,17 +41,17 @@ public class BoardCreationTests extends TestBase{
         int before = app.getPersonalBoardsCount();
         app.clickOnPlusButtonOnHeader();
         app.selectCreateBoardFromDropDown();
-        app.fillBoardCreationForm("qa21");
+        app.fillBoardCreationForm("Beutiful");
         app.confirmBoardCreationByClickingOnPlusOnHeaderRight();
         app.returnToHomePage();
         int after = app.getPersonalBoardsCount();
         Assert.assertEquals(after, before+1);
-        boolean isPresent = app.findWebElementByText("qa21");
+        boolean isPresent = app.findWebElementByText("Beutiful");
         Assert.assertEquals(isPresent, true);
     }
-//    @AfterClass
-//    public void deleteExtraBoards (){
-//        deleteBoardsInCycle();
-//}
+    @Test
+    public void deleteExtraBoards (){
+        app.deleteBoardsInCycle();
+}
 
 }

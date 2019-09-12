@@ -24,7 +24,7 @@ public class BoardCreationTests extends TestBase{
     }
 
     @Test
-    public void testBoardCreationByClickingOnCreateNewBoardButton() throws InterruptedException {
+    public void testBoardCreationByClickingOnCreateNewBoardButton() {
         //Assert.assertTrue(isUserLoggedIn());
         int before = app.getPersonalBoardsCount();
         app.createBoardGreyButton("Nice");
@@ -50,7 +50,7 @@ public class BoardCreationTests extends TestBase{
         Assert.assertEquals(isPresent, true);
     }
     @Test
-    public void deleteExtraBoards (){
+    public void deleteExtraBoardsTillThreeLeft (){
         app.deleteBoardsInCycle();
 }
 

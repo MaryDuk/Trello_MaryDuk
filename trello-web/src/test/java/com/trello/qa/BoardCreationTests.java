@@ -46,7 +46,7 @@ public class BoardCreationTests extends TestBase{
         app.returnToHomePage();
         int after = app.getPersonalBoardsCount();
         Assert.assertEquals(after, before+1);
-        boolean isPresent = app.findWebElementByText("Beutiful");
+        boolean isPresent = app.findWebElementByText("Beautiful");
         Assert.assertEquals(isPresent, true);
     }
     @AfterClass

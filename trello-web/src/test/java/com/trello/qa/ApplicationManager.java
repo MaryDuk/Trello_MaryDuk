@@ -193,7 +193,7 @@ public class ApplicationManager {
     }
 
     public void initPermanentlyDeleteBoard() {
-        click(By.xpath("//a[@class='quiet js-delete']"));
+        waitForElementAndClick(By.xpath("//a[@class='quiet js-delete']"), 20);
     }
 
     public void confirmCloseBoard() {

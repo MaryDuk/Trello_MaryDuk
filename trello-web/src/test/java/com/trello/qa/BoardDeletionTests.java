@@ -24,14 +24,22 @@ public class BoardDeletionTests extends TestBase{
 
     @BeforeMethod
     public void isAnyPersonalBoardPresent (){
-        if (app.getPersonalBoardsCount()<1) { app.createBoardGreyButton("First Board");
-            app.confirmBoardCreationByClickingOnCreateNewBoardButton();
-            app.returnToHomePage();  }
+        if (app.getPersonalBoardsCount()<1) { app.clickOnPlusButtonOnHeader();
+            app.selectCreateBoardFromDropDown();
+            app.fillBoardCreationForm("Beautiful");
+            app.confirmBoardCreationByClickingOnPlusOnHeaderRight();
+            app.returnToHomePage();
+            app.refreshPage();
+
+        }
+
     }
 
+
     @Test
-    public void deletionBoardTest () {
+    public void deletionBoardTest (){
         int before = app.getPersonalBoardsCount();
+        System.out.println(before);
         app.clickOnFirstPrivateBoard();
         app.clickOnMoreButtonInBoardMenu();
         app.initCloseBoard();

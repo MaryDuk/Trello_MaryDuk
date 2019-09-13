@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class BoardDeletionTests extends TestBase{
-
+ //Test passed!!
     @BeforeClass
     public void ensurePreconditionsLogin(){
         if(!app.isUserLoggedIn()){

@@ -41,7 +41,7 @@ public class BoardCreationTests extends TestBase{
         int before = app.getPersonalBoardsCount();
         app.clickOnPlusButtonOnHeader();
         app.selectCreateBoardFromDropDown();
-        app.fillBoardCreationForm("Beutiful");
+        app.fillBoardCreationForm("Beautiful");
         app.confirmBoardCreationByClickingOnPlusOnHeaderRight();
         app.returnToHomePage();
         int after = app.getPersonalBoardsCount();

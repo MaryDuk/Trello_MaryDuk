@@ -54,7 +54,7 @@ public class TeamCreationTests extends  TestBase{
     }
 
     @Test(enabled=false)
-    public void testTeamCuncellCreationFromPlusButtonOnHeader(){
+    public void testTeamCancelCreationFromPlusButtonOnHeader(){
         app.clickOnPlusButtonOnHeader();
         app.selectCreateTeamFromDropDown();
         String teamName = "qa21-" + System.currentTimeMillis();

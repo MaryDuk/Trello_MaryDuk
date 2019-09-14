@@ -13,12 +13,11 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
-
     WebDriver driver;
 
     public void init() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         openSite("https://trello.com");
         login("m.duksaite@gmail.com","trusty07");
@@ -86,11 +85,12 @@ public class ApplicationManager {
     }
 
     public void selectCreateBoardFromDropDown() {
-        click(By.cssSelector("[data-test-id='header-create-board-button']"));
+        waitForElementAndClick(By.cssSelector("[data-test-id='header-create-board-button']"), 20);
     }
 
     public void confirmBoardCreationByClickingOnCreateNewBoardButton() {
-        click(By.xpath("//span[contains(text(),'Create Board')]"));
+        waitForElementAndClick(By.xpath("//span[contains(text(),'Create Board')]"), 20);
+        //click(By.xpath("//span[contains(text(),'Create Board')]"));
     }
 
     public void confirmBoardCreationByClickingOnPlusOnHeaderRight() {
@@ -193,6 +193,7 @@ public class ApplicationManager {
     }
 
     public void initPermanentlyDeleteBoard() {
+        refreshPage();
         waitForElementAndClick(By.xpath("//a[@class='quiet js-delete']"), 20);
     }
 
@@ -224,7 +225,6 @@ public class ApplicationManager {
 
     public void deleteBoardsInCycle (){
         int before = getPersonalBoardsCount();
-        if (before >=4) {
             while (before > 3) {
                clickOnFirstPrivateBoard();
                 clickOnMoreButtonInBoardMenu();
@@ -235,8 +235,6 @@ public class ApplicationManager {
                 returnToHomePage();
                 before = getPersonalBoardsCount();
            }
-        }
-
     }
 
     public void waitForElementAndClick(By locator, int time) {

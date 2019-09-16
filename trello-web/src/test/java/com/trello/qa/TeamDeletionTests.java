@@ -15,31 +15,32 @@ public class TeamDeletionTests extends TestBase {
 
     @BeforeMethod
     public void isOnHomePage () {
-        if (!app.isTherePersonalBoards())
+        if (!app.getBoardHelper().isTherePersonalBoards())
         {
-            app.returnToHomePage();
+            app.getTeamHelper().returnToHomePage();
         }
     }
 
     @BeforeMethod
     public void isAnyTeamPresent (){
-        if (app.getTeamsCount()<1){
-            app.clickOnPlusButtonOnLeftNavMenu();
-            app.fillTeamCreationForm("Smile", "People");
-            app.clickContinueButton();
-            app.returnToHomePage();
+        if (app.getTeamHelper().getTeamsCount()<1){
+            app.getTeamHelper().clickOnPlusButtonOnLeftNavMenu();
+            app.getTeamHelper().fillTeamCreationForm("Smile", "People");
+            app.getTeamHelper().clickContinueButton();
+            app.getTeamHelper().returnToHomePage();
         }
 
     }
 
     @Test
     public void deleteTeamFromLeftNavMenu(){
-        int before = app.getTeamsCount();
-        app.clickOnFirstTeam();
-        app.openSettings();
-        app.deleteTeam();
-        app.returnToHomePage();
-        int after = app.getTeamsCount();
+        int before = app.getTeamHelper().getTeamsCount();
+        app.getTeamHelper().clickOnFirstTeam();
+        app.getTeamHelper().openSettings();
+        app.getTeamHelper().deleteTeam();
+        app.getTeamHelper().returnToHomePage();
+        app.getTeamHelper().refreshPage();
+        int after = app.getTeamHelper().getTeamsCount();
         Assert.assertEquals(after, before-1);
 
     }

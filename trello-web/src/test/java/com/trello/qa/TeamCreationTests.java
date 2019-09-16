@@ -1,6 +1,7 @@
 package com.trello.qa;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -62,6 +63,10 @@ public class TeamCreationTests extends  TestBase{
         app.clickXButton();
         //Assert
         Assert.assertTrue(app.isUserLoggedIn());
+    }
+    @AfterClass
+    public void postActions (){
+        app.cleanTeams();
     }
 
 }

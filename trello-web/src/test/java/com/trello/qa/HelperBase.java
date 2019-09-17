@@ -58,6 +58,10 @@ public class HelperBase {
 
         } //checking that the element is present block of teams
 
+    public boolean isTherePersonalBoards() {
+        return isElementPresent(By.xpath("//*[@class='icon-lg icon-member']/../../.."));
+    }
+
     public void clickXButton() {
 
     }

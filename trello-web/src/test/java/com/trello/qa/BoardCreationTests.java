@@ -50,7 +50,7 @@ public class BoardCreationTests extends TestBase{
         Assert.assertEquals(isPresent, true);
     }
     @AfterClass
-    public void deleteExtraBoardsTillThreeLeft (){
+    public void deleteExtraBoardsTillThreeLeft () throws InterruptedException {
         app.getBoardHelper().deleteBoardsInCycle();
 }
 

@@ -19,7 +19,7 @@ public class ApplicationManager {
 
     public void init() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         teamHelper = new TeamHelper(driver);
         boardHelper = new BoardHelper(driver);

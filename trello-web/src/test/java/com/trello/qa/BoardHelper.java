@@ -67,9 +67,7 @@ public class BoardHelper extends HelperBase{
        return false;
     }
 
-    public boolean isTherePersonalBoards() {
-        return isElementPresent(By.xpath("//*[@class='icon-lg icon-member']/../../.."));
-    }
+
 
     public void confirmDeleteBoard() {
         click(By.xpath("//input[@class='js-confirm full negate']"));

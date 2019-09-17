@@ -4,12 +4,15 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TeamDeletionTests extends TestBase {
+
     @BeforeClass
     public void ensurePreconditionsLogin(){
-        if(!app.isUserLoggedIn()){
-            app.login("m.duksaite@gmail.com","trusty07");
+        if(!app.getSessionHelper().isUserLoggedIn()){
+            app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
         }
     }
 

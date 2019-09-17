@@ -104,10 +104,11 @@ public class BoardHelper extends HelperBase{
         click(By.xpath("//*[@class='icon-lg icon-member']/../../..//li"));
     }
 
-    public void deleteBoardsInCycle (){
+    public void deleteBoardsInCycle () throws InterruptedException {
         int before = getPersonalBoardsCount();
             while (before > 3) {
                clickOnFirstPrivateBoard();
+               Thread.sleep(3000);
                 clickOnMoreButtonInBoardMenu();
                 initCloseBoard();
                 confirmCloseBoard();

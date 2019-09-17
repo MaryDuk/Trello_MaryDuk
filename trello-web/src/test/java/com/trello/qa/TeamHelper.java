@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
 
 public class TeamHelper extends HelperBase {
 
@@ -38,8 +39,20 @@ public class TeamHelper extends HelperBase {
         waitForElementAndClick(By.xpath("//span[contains(text(),'Settings')]"), 30);
     }
 
+    public void openSettings1() throws InterruptedException {
+        Thread.sleep(5000);
+        click(By.xpath("//*[@class='icon-gear icon-sm OiX3P2i2J92Xat']/../../.."));
+    }
+
+
     public void clickOnFirstTeam() {
         click(By.xpath("//*[@class='_mtkwfAlvk6O3f']/../../..//li")); // clicks on first element
+    }
+
+    public void clickOnFirstTeam1() {
+        //waitForElementAndClick(By.cssSelector("[data-test-id^='home-team-tab-section-']"), 20);
+        //click(By.xpath("//*[@data-test-id='home-team-tab-name']"));
+        click(By.cssSelector("[data-test-id^='home-team-tab-section-']"));
     }
 
     public void cleanTeams (){
@@ -54,4 +67,5 @@ public class TeamHelper extends HelperBase {
             System.out.println(count);
         }
     }
+
 }

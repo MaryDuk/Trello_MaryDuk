@@ -9,27 +9,27 @@ public class BoardDeletionTests extends TestBase{
  //Test passed!!
     @BeforeClass
     public void ensurePreconditionsLogin(){
-        if(!app.isUserLoggedIn()){
-            app.login("m.duksaite@gmail.com","trusty07");
+        if(!app.getSessionHelper().isUserLoggedIn()){
+            app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
         }
     }
 
     @BeforeMethod
     public void isOnHomePage () {
-        if (!app.isTherePersonalBoards())
+        if (!app.getBoardHelper().isTherePersonalBoards())
         {
-            app.returnToHomePage();
+            app.getBoardHelper().returnToHomePage();
         }
     }
 
     @BeforeMethod
     public void isAnyPersonalBoardPresent (){
-        if (app.getPersonalBoardsCount()<1) { app.clickOnPlusButtonOnHeader();
-            app.selectCreateBoardFromDropDown();
-            app.fillBoardCreationForm("Beautiful");
-            app.confirmBoardCreationByClickingOnPlusOnHeaderRight();
-            app.returnToHomePage();
-            app.refreshPage();
+        if (app.getBoardHelper().getPersonalBoardsCount()<1) { app.getBoardHelper().clickOnPlusButtonOnHeader();
+            app.getBoardHelper().selectCreateBoardFromDropDown();
+            app.getBoardHelper().fillBoardCreationForm("Beautiful");
+            app.getBoardHelper().confirmBoardCreationByClickingOnPlusOnHeaderRight();
+            app.getBoardHelper().returnToHomePage();
+            app.getBoardHelper().refreshPage();
 
         }
 
@@ -38,16 +38,16 @@ public class BoardDeletionTests extends TestBase{
 
     @Test
     public void deletionBoardTest (){
-        int before = app.getPersonalBoardsCount();
+        int before = app.getBoardHelper().getPersonalBoardsCount();
         System.out.println(before);
-        app.clickOnFirstPrivateBoard();
-        app.clickOnMoreButtonInBoardMenu();
-        app.initCloseBoard();
-        app.confirmCloseBoard();
-        app.initPermanentlyDeleteBoard();
-        app.confirmDeleteBoard();
-        app.returnToHomePage();
-        int after = app.getPersonalBoardsCount();
+        app.getBoardHelper().clickOnFirstPrivateBoard();
+        app.getBoardHelper().clickOnMoreButtonInBoardMenu();
+        app.getBoardHelper().initCloseBoard();
+        app.getBoardHelper().confirmCloseBoard();
+        app.getBoardHelper().initPermanentlyDeleteBoard();
+        app.getBoardHelper().confirmDeleteBoard();
+        app.getBoardHelper().returnToHomePage();
+        int after = app.getBoardHelper().getPersonalBoardsCount();
         Assert.assertEquals(after, before-1);
     }
 

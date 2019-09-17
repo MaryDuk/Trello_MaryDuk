@@ -10,48 +10,48 @@ public class BoardCreationTests extends TestBase{
 
     @BeforeClass
     public void ensurePreconditionsLogin(){
-        if(!app.isUserLoggedIn()){
-            app.login("m.duksaite@gmail.com","trusty07");
+        if(!app.getSessionHelper().isUserLoggedIn()){
+            app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
         }
     }
 
     @BeforeMethod
     public void isOnHomePage () {
-        if (!app.isTherePersonalBoards())
+        if (!app.getBoardHelper().isTherePersonalBoards())
         {
-            app.returnToHomePage();
+            app.getBoardHelper().returnToHomePage();
         }
     }
 
     @Test
     public void testBoardCreationByClickingOnCreateNewBoardButton() {
         //Assert.assertTrue(isUserLoggedIn());
-        int before = app.getPersonalBoardsCount();
-        app.createBoardGreyButton("Nice");
-        app.confirmBoardCreationByClickingOnCreateNewBoardButton();
-        app.returnToHomePage();
-        int after = app.getPersonalBoardsCount();
+        int before = app.getBoardHelper().getPersonalBoardsCount();
+        app.getBoardHelper().createBoardGreyButton("Nice");
+        app.getBoardHelper().confirmBoardCreationByClickingOnCreateNewBoardButton();
+        app.getBoardHelper().returnToHomePage();
+        int after = app.getBoardHelper().getPersonalBoardsCount();
         Assert.assertEquals(after, before+1);
-        boolean isPresent = app.findWebElementByText("Nice");
+        boolean isPresent = app.getBoardHelper().findWebElementByText("Nice");
         Assert.assertEquals(isPresent, true);
     }
 
     @Test
     public void testBoardCreationByClickingOnPlusOnHeaderRight() {
-        int before = app.getPersonalBoardsCount();
-        app.clickOnPlusButtonOnHeader();
-        app.selectCreateBoardFromDropDown();
-        app.fillBoardCreationForm("Beautiful");
-        app.confirmBoardCreationByClickingOnPlusOnHeaderRight();
-        app.returnToHomePage();
-        int after = app.getPersonalBoardsCount();
+        int before = app.getBoardHelper().getPersonalBoardsCount();
+        app.getBoardHelper().clickOnPlusButtonOnHeader();
+        app.getBoardHelper().selectCreateBoardFromDropDown();
+        app.getBoardHelper().fillBoardCreationForm("Beautiful");
+        app.getBoardHelper().confirmBoardCreationByClickingOnPlusOnHeaderRight();
+        app.getBoardHelper().returnToHomePage();
+        int after = app.getBoardHelper().getPersonalBoardsCount();
         Assert.assertEquals(after, before+1);
-        boolean isPresent = app.findWebElementByText("Beautiful");
+        boolean isPresent = app.getBoardHelper().findWebElementByText("Beautiful");
         Assert.assertEquals(isPresent, true);
     }
     @AfterClass
     public void deleteExtraBoardsTillThreeLeft (){
-        app.deleteBoardsInCycle();
+        app.getBoardHelper().deleteBoardsInCycle();
 }
 
 }

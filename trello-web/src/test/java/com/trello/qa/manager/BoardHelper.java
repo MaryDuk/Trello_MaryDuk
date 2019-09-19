@@ -1,4 +1,4 @@
-package com.trello.qa;
+package com.trello.qa.manager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -58,7 +58,7 @@ public class BoardHelper extends HelperBase{
     return driver.findElements(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li")).size()-1;
     }
 
-    protected Boolean findWebElementByText (String boardTitle) {
+    public Boolean findWebElementByText(String boardTitle) {
     List<WebElement> webElementsList = driver.findElements(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li"));
         for(WebElement element : webElementsList){
             if(element.getText().equals(boardTitle))

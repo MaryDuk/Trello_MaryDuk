@@ -1,11 +1,9 @@
-package com.trello.qa;
+package com.trello.qa.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TeamDeletionTests extends TestBase {
 

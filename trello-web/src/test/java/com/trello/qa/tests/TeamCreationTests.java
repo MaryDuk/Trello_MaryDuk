@@ -1,4 +1,4 @@
-package com.trello.qa;
+package com.trello.qa.tests;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;

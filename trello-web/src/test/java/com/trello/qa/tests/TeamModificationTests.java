@@ -1,9 +1,36 @@
 package com.trello.qa.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TeamModificationTests extends TestBase {
+    @BeforeClass
+    public void ensurePreconditionsLogin(){
+        if(!app.getSessionHelper().isUserLoggedIn()){
+            app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
+        }
+    }
+
+    @BeforeMethod
+    public void isOnHomePage () {
+        if (!app.getBoardHelper().isTherePersonalBoards())
+        {
+            app.getTeamHelper().returnToHomePage();
+        }
+    }
+
+    @BeforeMethod
+    public void isAnyTeamPresent (){
+        if (app.getTeamHelper().getTeamsCount()<1){
+            app.getTeamHelper().clickOnPlusButtonOnLeftNavMenu();
+            app.getTeamHelper().fillTeamCreationForm("Smile", "People");
+            app.getTeamHelper().clickContinueButton();
+            app.getTeamHelper().returnToHomePage();
+        }
+
+    }
 
 
     @Test

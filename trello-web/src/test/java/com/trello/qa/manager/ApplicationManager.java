@@ -26,9 +26,10 @@ public class ApplicationManager {
             driver = new ChromeDriver();
         }if (browser.equals(BrowserType.FIREFOX)){
             driver = new FirefoxDriver();
-        }if (browser.equals(BrowserType.IE)){
-            driver = new InternetExplorerDriver(); // to add driver to Tools
         }
+//        if (browser.equals(BrowserType.IE)){
+//            driver = new InternetExplorerDriver(); // to add driver to Tools
+//        }
 
 
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);

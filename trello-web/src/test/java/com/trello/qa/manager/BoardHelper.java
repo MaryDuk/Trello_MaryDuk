@@ -118,4 +118,11 @@ public class BoardHelper extends HelperBase{
                 before = getPersonalBoardsCount();
            }
     }
+
+    public void changeBoardName(String name) {
+        //waitForElementAndClick(By.xpath("//span[@class='js-board-editing-target board-header-btn-text']"), 10);
+        //type(By.xpath("//span[@class='js-board-editing-target board-header-btn-text']"), name);
+        click(By.xpath("//span[@class='js-board-editing-target board-header-btn-text']"));
+        typeByJavaScriptExecutorBoardName(By.xpath("//input[@class='board-name-input js-board-name-input']"), name);
+    }
 }

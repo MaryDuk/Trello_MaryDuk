@@ -1,6 +1,7 @@
 package com.trello.qa.manager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,7 +23,15 @@ public class HelperBase {
     driver.findElement(locator).click();
     driver.findElement(locator).clear();
     driver.findElement(locator).sendKeys(text);
+    }
 
+    public void typeByJavaScriptExecutorBoardName(By inputLocator, String text){
+//        Thread.sleep(1000);
+//        driver.findElement(btnLocator).click();
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].value='" + text + "';", driver.findElement(inputLocator));
+        //driver.findElement(inputLocator).clear();
+        //driver.findElement(inputLocator).sendKeys(text);
     }
 
     public boolean isElementPresent (By locator) {

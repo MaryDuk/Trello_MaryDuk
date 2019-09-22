@@ -32,7 +32,7 @@ public class BoardDeletionTests extends TestBase{
             app.getBoardHelper().refreshPage();
 
         }
-
+//test
     }
 
 

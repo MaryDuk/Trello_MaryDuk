@@ -13,31 +13,17 @@ public class BoardHelper extends HelperBase{
         super(driver);
     }
 
-    public void fillBoardCreationForm(String boardName) {
-        type(By.cssSelector("[data-test-id='header-create-board-title-input']"), boardName);
+    public void fillBoardCreationForm(BoardData board) {
+        type(By.cssSelector("[data-test-id='header-create-board-title-input']"), board.getBoardTitle());
         if(isElementPresent(By.cssSelector(".W6rMLOx8U0MrPx"))){
             click(By.cssSelector(".W6rMLOx8U0MrPx"));
             click(By.xpath("//nav[@class='SdlcRrTVPA8Y3K']//li[1]"));//no team
         }
 
     }
-
-    public void selectCreateBoardFromDropDown() {
-        waitForElementAndClick(By.cssSelector("[data-test-id='header-create-board-button']"), 20);
-    }
-
-    public void confirmBoardCreationByClickingOnCreateNewBoardButton() {
-        waitForElementAndClick(By.xpath("//span[contains(text(),'Create Board')]"), 20);
-        //click(By.xpath("//span[contains(text(),'Create Board')]"));
-    }
-
-    public void confirmBoardCreationByClickingOnPlusOnHeaderRight() {
-        waitForElementAndClick(By.cssSelector("[data-test-id='header-create-board-submit-button']"), 30);
-    }
-
-    public void createBoardGreyButton (String boardTitle) {
+    public void createBoardGreyButton (BoardData board) {
         click(By.xpath("//*[@class='icon-lg icon-member']/../../..//span[contains(text(),'Create new board')]"));
-        type(By.cssSelector("[placeholder='Add board title']"),boardTitle);
+        type(By.cssSelector("[placeholder='Add board title']"),board.getBoardTitle());
         click(By.cssSelector("[class='icon-sm icon-overflow-menu-horizontal']"));
         int teams = getTeamsCount();
         System.out.println(teams);
@@ -49,6 +35,22 @@ public class BoardHelper extends HelperBase{
         //click(By.xpath("//span[contains(text(),'Private')]"));
     }
 
+    public void selectCreateBoardFromDropDown() throws InterruptedException {
+        Thread.sleep(3000);
+        waitForElementAndClick(By.cssSelector("[data-test-id='header-create-board-button']"), 30);
+    }
+
+    public void confirmBoardCreationByClickingOnCreateNewBoardButton() {
+        waitForElementAndClick(By.xpath("//span[contains(text(),'Create Board')]"), 20);
+        //click(By.xpath("//span[contains(text(),'Create Board')]"));
+    }
+
+    public void confirmBoardCreationByClickingOnPlusOnHeaderRight() {
+        waitForElementAndClick(By.cssSelector("[data-test-id='header-create-board-submit-button']"), 30);
+    }
+
+
+
     public List<WebElement> getList(String selector){
         return driver.findElements(By.xpath(selector));
     }
@@ -58,7 +60,8 @@ public class BoardHelper extends HelperBase{
     return driver.findElements(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li")).size()-1;
     }
 
-    public Boolean findWebElementByText(String boardTitle) {
+    public Boolean findWebElementByText(String boardTitle) throws InterruptedException {
+        Thread.sleep(3000);
     List<WebElement> webElementsList = driver.findElements(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li"));
         for(WebElement element : webElementsList){
             if(element.getText().equals(boardTitle))

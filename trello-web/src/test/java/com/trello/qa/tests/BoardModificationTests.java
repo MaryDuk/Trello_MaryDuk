@@ -1,5 +1,6 @@
 package com.trello.qa.tests;
 
+import com.trello.qa.manager.BoardData;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -23,10 +24,10 @@ public class BoardModificationTests extends TestBase {
     }
 
     @BeforeMethod
-    public void isAnyPersonalBoardPresent (){
+    public void isAnyPersonalBoardPresent () throws InterruptedException {
         if (app.getBoardHelper().getPersonalBoardsCount()<1) { app.getBoardHelper().clickOnPlusButtonOnHeader();
             app.getBoardHelper().selectCreateBoardFromDropDown();
-            app.getBoardHelper().fillBoardCreationForm("Beautiful");
+            app.getBoardHelper().fillBoardCreationForm(new BoardData().withBoardTitle("Beautiful"));
             app.getBoardHelper().confirmBoardCreationByClickingOnPlusOnHeaderRight();
             app.getBoardHelper().returnToHomePage();
             app.getBoardHelper().refreshPage();
@@ -35,7 +36,7 @@ public class BoardModificationTests extends TestBase {
     }
 
   @Test
-  public void   testChangeBoardTitle () {
+  public void   testChangeBoardTitle () throws InterruptedException {
         app.getBoardHelper().clickOnFirstPrivateBoard();
         String name = "Great";
         app.getBoardHelper().changeBoardName(name);

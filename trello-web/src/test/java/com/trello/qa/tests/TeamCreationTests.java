@@ -109,7 +109,7 @@ public class TeamCreationTests extends  TestBase{
         Assert.assertEquals(after, before+1);
         Assert.assertEquals(createdTeamName.toLowerCase(), teamName.toLowerCase());
     }
-    @AfterClass
+    @AfterClass (enabled=false)
     public void postActions (){
         app.getTeamHelper().cleanTeams();
     }

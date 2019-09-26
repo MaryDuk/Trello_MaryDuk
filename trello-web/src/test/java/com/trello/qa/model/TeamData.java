@@ -1,4 +1,4 @@
-package com.trello.qa.manager;
+package com.trello.qa.model;
 
 public class TeamData {
     private  String teamName;

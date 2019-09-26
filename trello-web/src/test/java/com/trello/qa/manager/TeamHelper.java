@@ -1,5 +1,6 @@
 package com.trello.qa.manager;
 
+import com.trello.qa.model.TeamData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -35,10 +36,12 @@ public class TeamHelper extends HelperBase {
         click(By.cssSelector(".js-confirm.full.negate"));
     }
 
-    public void openSettings() {
+    public void openSettings() throws InterruptedException {
         //new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.cssSelector(".icon-gear.icon-sm.OiX3P2i2J92XatType a message her")));
         //click(By.cssSelector(".icon-gear.icon-sm.OiX3P2i2J92XatType a message here"));
-        waitForElementAndClick(By.xpath("//span[contains(text(),'Settings')]"), 30);
+        Thread.sleep(3000);
+        //waitForElementAndClick(By.xpath("//span[contains(text(),'Settings')]"), 30);
+        click(By.cssSelector("ul .icon-gear.icon-sm"));
     }
 
     public void openSettings1() throws InterruptedException {
@@ -57,7 +60,7 @@ public class TeamHelper extends HelperBase {
         click(By.cssSelector("[data-test-id^='home-team-tab-section-']"));
     }
 
-    public void cleanTeams (){
+    public void cleanTeams () throws InterruptedException {
         int count = getTeamsCount();
         while (count >5){
             clickOnFirstTeam();

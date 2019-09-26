@@ -1,5 +1,6 @@
 package com.trello.qa.manager;
 
+import com.trello.qa.model.BoardData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -46,7 +47,8 @@ public class BoardHelper extends HelperBase{
     }
 
     public void confirmBoardCreationByClickingOnPlusOnHeaderRight() {
-        waitForElementAndClick(By.cssSelector("[data-test-id='header-create-board-submit-button']"), 30);
+        //waitForElementAndClick(By.cssSelector("[data-test-id='header-create-board-submit-button']"), 30);
+        click(By.cssSelector("[data-test-id='header-create-board-submit-button']"));
     }
 
 

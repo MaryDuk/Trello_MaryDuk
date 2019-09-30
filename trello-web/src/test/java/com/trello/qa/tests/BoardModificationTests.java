@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class BoardModificationTests extends TestBase {
 
     @BeforeClass
-    public void ensurePreconditionsLogin(){
+    public void ensurePreconditionsLogin() throws InterruptedException {
         if(!app.getSessionHelper().isUserLoggedIn()){
             app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
         }

@@ -1,7 +1,7 @@
 package com.trello.qa.model;
 
 public class BoardData {
-    private String boardTitle;
+    public String boardTitle;
 
 //    public BoardData(String boardTitle) {
 //        this.boardTitle = boardTitle;

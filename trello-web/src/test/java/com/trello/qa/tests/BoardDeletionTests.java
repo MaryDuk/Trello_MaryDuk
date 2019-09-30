@@ -2,6 +2,7 @@ package com.trello.qa.tests;
 
 import com.trello.qa.model.BoardData;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,7 +10,7 @@ import org.testng.annotations.Test;
 public class BoardDeletionTests extends TestBase{
  //Test passed!!
     @BeforeClass
-    public void ensurePreconditionsLogin(){
+    public void ensurePreconditionsLogin() throws InterruptedException {
         if(!app.getSessionHelper().isUserLoggedIn()){
             app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
         }
@@ -38,7 +39,7 @@ public class BoardDeletionTests extends TestBase{
 
 
     @Test
-    public void deletionBoardTest (){
+    public void deletionBoardTest () throws InterruptedException {
         int before = app.getBoardHelper().getPersonalBoardsCount();
         System.out.println(before);
         app.getBoardHelper().clickOnFirstPrivateBoard();
@@ -51,7 +52,6 @@ public class BoardDeletionTests extends TestBase{
         int after = app.getBoardHelper().getPersonalBoardsCount();
         Assert.assertEquals(after, before-1);
     }
-
 
 }
 

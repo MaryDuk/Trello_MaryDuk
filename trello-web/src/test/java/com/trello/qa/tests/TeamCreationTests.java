@@ -26,15 +26,18 @@ public class TeamCreationTests extends  TestBase{
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/Team.csv")));
         String line = reader.readLine();
         while (line!=null){
-            String[] split = line.split(",");
-            list.add(new Object[] {new TeamData().withTeamName(split[0]).withDescription(split[1])});
+            TeamData teamData = new TeamData();
+            String[] values = line.split(",");
+            list.add(new Object[] {
+                    teamData.withTeamName(values[0]).withDescription(values[1])
+            });
             line = reader.readLine();
         }
         return list.iterator();
     }
 
     @BeforeClass
-    public void ensurePreconditionsLogin(){
+    public void ensurePreconditionsLogin() throws InterruptedException {
         if(!app.getSessionHelper().isUserLoggedIn()){
             app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
         }
@@ -81,7 +84,7 @@ public class TeamCreationTests extends  TestBase{
     }
 
     @Test(enabled=false)
-    public void testTeamCancelCreationFromPlusButtonOnHeader(){
+    public void testTeamCancelCreationFromPlusButtonOnHeader() throws InterruptedException {
         app.getTeamHelper().clickOnPlusButtonOnHeader();
         app.getTeamHelper().selectCreateTeamFromDropDown();
         String teamName = "qa21-" + System.currentTimeMillis();
@@ -92,7 +95,7 @@ public class TeamCreationTests extends  TestBase{
     }
 
     @Test(dataProvider = "validTeams")
-    public void testTeamCreationFromPlusButtonOnHeaderWithDataProvider(String teamName, String description) {
+    public void testTeamCreationFromPlusButtonOnHeaderWithDataProvider(String teamName, String description) throws InterruptedException {
        TeamData team = new TeamData().withTeamName(teamName).withDescription(description);
         int before = app.getTeamHelper().getTeamsCount();
         System.out.println(before);
@@ -111,7 +114,7 @@ public class TeamCreationTests extends  TestBase{
     }
 
     @Test(dataProvider = "validTeamsfromcsv")
-    public void testTeamCreationFromPlusButtonOnHeaderWithDataProviderfromcsv(TeamData team){
+    public void testTeamCreationFromPlusButtonOnHeaderWithDataProviderfromcsv(TeamData team) throws InterruptedException {
         // TeamData team = new TeamData().withTeamName(teamName).withDescription(description);
         int before = app.getTeamHelper().getTeamsCount();
         app.getTeamHelper().clickOnPlusButtonOnHeader();

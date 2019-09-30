@@ -14,7 +14,7 @@ public class BoardHelper extends HelperBase{
         super(driver);
     }
 
-    public void fillBoardCreationForm(BoardData board) {
+    public void fillBoardCreationForm(BoardData board) throws InterruptedException {
         type(By.cssSelector("[data-test-id='header-create-board-title-input']"), board.getBoardTitle());
         if(isElementPresent(By.cssSelector(".W6rMLOx8U0MrPx"))){
             click(By.cssSelector(".W6rMLOx8U0MrPx"));
@@ -22,7 +22,7 @@ public class BoardHelper extends HelperBase{
         }
 
     }
-    public void createBoardGreyButton (BoardData board) {
+    public void createBoardGreyButton (BoardData board) throws InterruptedException {
         click(By.xpath("//*[@class='icon-lg icon-member']/../../..//span[contains(text(),'Create new board')]"));
         type(By.cssSelector("[placeholder='Add board title']"),board.getBoardTitle());
         click(By.cssSelector("[class='icon-sm icon-overflow-menu-horizontal']"));
@@ -78,9 +78,10 @@ public class BoardHelper extends HelperBase{
         click(By.xpath("//input[@class='js-confirm full negate']"));
     }
 
-    public void initPermanentlyDeleteBoard() {
+    public void initPermanentlyDeleteBoard() throws InterruptedException {
         refreshPage();
-        waitForElementAndClick(By.xpath("//a[@class='quiet js-delete']"), 20);
+        Thread.sleep(3000);
+        waitForElementAndClick(By.xpath("//a[@class='quiet js-delete']"), 30);
     }
 
     public void confirmCloseBoard() {

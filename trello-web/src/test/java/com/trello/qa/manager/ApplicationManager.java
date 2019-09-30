@@ -20,7 +20,7 @@ public class ApplicationManager {
         this.browser = browser;
     }
 
-    public void init() {
+    public void init() throws InterruptedException {
         //String browser = null; //needs to be removed later
         if (browser.equals(BrowserType.CHROME)){
             driver = new ChromeDriver();

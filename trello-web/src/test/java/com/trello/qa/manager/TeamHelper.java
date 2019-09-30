@@ -15,7 +15,7 @@ public class TeamHelper extends HelperBase {
         super(driver);
     }
 
-    public void fillTeamCreationForm(TeamData team) {
+    public void fillTeamCreationForm(TeamData team) throws InterruptedException {
         type(By.cssSelector("[data-test-id='header-create-team-name-input']"), team.getTeamName());
         type(By.cssSelector("textarea"), team.getDescription());
     }
@@ -78,7 +78,7 @@ public class TeamHelper extends HelperBase {
        // waitForElementAndClick(By.cssSelector(".js-edit-profile"), 30);
     }
 
-    public void changeTeamProfile(String name, String description) {
+    public void changeTeamProfile(String name, String description) throws InterruptedException {
         type(By.name("displayName"), name);
         type(By.name("desc"), description);
 

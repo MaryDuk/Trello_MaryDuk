@@ -19,8 +19,9 @@ public class HelperBase {
     driver.findElement(locator).click();
     }
 
-    public void type(By locator, String text){
+    public void type(By locator, String text) throws InterruptedException {
         if (text!=null){
+            Thread.sleep(3000);
             driver.findElement(locator).click();
             driver.findElement(locator).clear();
             driver.findElement(locator).sendKeys(text);
@@ -79,7 +80,7 @@ public class HelperBase {
 
     public void refreshPage() {
         driver.navigate().refresh();
-    }
+    }//a[@class='quiet js-delete
 
     public void clickOnPlusButtonOnLeftNavMenu() {
         click(By.cssSelector(".icon-add.icon-sm"));

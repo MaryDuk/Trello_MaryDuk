@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class TeamDeletionTests extends TestBase {
 
     @BeforeClass
-    public void ensurePreconditionsLogin(){
+    public void ensurePreconditionsLogin() throws InterruptedException {
         if(!app.getSessionHelper().isUserLoggedIn()){
             app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
         }
@@ -24,7 +24,7 @@ public class TeamDeletionTests extends TestBase {
     }
 
     @BeforeMethod
-    public void isAnyTeamPresent (){
+    public void isAnyTeamPresent () throws InterruptedException {
         if (app.getTeamHelper().getTeamsCount()<1){
             app.getTeamHelper().clickOnPlusButtonOnLeftNavMenu();
             app.getTeamHelper().fillTeamCreationForm(new TeamData().withTeamName("Smile").withDescription("People"));
@@ -35,7 +35,7 @@ public class TeamDeletionTests extends TestBase {
     }
 
     @Test
-    public void deleteTeamFromLeftNavMenu(){
+    public void deleteTeamFromLeftNavMenu() throws InterruptedException {
         int before = app.getTeamHelper().getTeamsCount();
         app.getTeamHelper().clickOnFirstTeam();
         app.getTeamHelper().openSettings();

@@ -26,18 +26,20 @@ public Iterator<Object[]> validBoards(){
     }
 
     @DataProvider
-    public Iterator<Object[]>validBoardscsv() throws IOException {
-        List <Object[]> list = new ArrayList<>();
+    public Iterator<Object> validBoardscsv() throws IOException {
+        List <Object> list = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/Board.csv")));
         String line = reader.readLine();
         while (line!=null){
+            BoardData boardData = new BoardData();
+            list.add(boardData.withBoardTitle(line));
             line = reader.readLine();
         }
         return list.iterator();
     }
 
     @BeforeClass
-    public void ensurePreconditionsLogin(){
+    public void ensurePreconditionsLogin() throws InterruptedException {
         if(!app.getSessionHelper().isUserLoggedIn()){
             app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
         }
@@ -105,10 +107,23 @@ public Iterator<Object[]> validBoards(){
         boolean isPresent = app.getBoardHelper().findWebElementByText(boardTitle);
         Assert.assertEquals(isPresent, true);
     }
+    @Test (dataProvider = "validBoardscsv")
+    public void testBoardCreationByClickingOnPlusOnHeaderRightWithDataProvidercsv(BoardData board) throws InterruptedException {
+        int before = app.getBoardHelper().getPersonalBoardsCount();
+        app.getBoardHelper().clickOnPlusButtonOnHeader();
+        app.getBoardHelper().selectCreateBoardFromDropDown();
+        app.getBoardHelper().fillBoardCreationForm(board);
+        app.getBoardHelper().confirmBoardCreationByClickingOnPlusOnHeaderRight();
+        app.getBoardHelper().returnToHomePage();
+        int after = app.getBoardHelper().getPersonalBoardsCount();
+        Assert.assertEquals(after, before+1);
+        boolean isPresent = app.getBoardHelper().findWebElementByText(board.getBoardTitle());
+        Assert.assertEquals(isPresent, true);
+    }
 
-    @AfterClass (enabled = false)
+    @AfterClass
     public void deleteExtraBoardsTillThreeLeft () throws InterruptedException {
         app.getBoardHelper().deleteBoardsInCycle();
-}
+    }
 
 }

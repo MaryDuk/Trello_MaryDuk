@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class TeamModificationTests extends TestBase {
     @BeforeClass
-    public void ensurePreconditionsLogin(){
+    public void ensurePreconditionsLogin() throws InterruptedException {
         if(!app.getSessionHelper().isUserLoggedIn()){
             app.getSessionHelper().login("m.duksaite@gmail.com","trusty07");
         }
@@ -23,7 +23,7 @@ public class TeamModificationTests extends TestBase {
     }
 
     @BeforeMethod
-    public void isAnyTeamPresent (){
+    public void isAnyTeamPresent () throws InterruptedException {
         if (app.getTeamHelper().getTeamsCount()<1){
             app.getTeamHelper().clickOnPlusButtonOnLeftNavMenu();
             app.getTeamHelper().fillTeamCreationForm(new TeamData().withTeamName("Smile").withDescription("People"));

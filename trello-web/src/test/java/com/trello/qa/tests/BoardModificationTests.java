@@ -44,6 +44,7 @@ public class BoardModificationTests extends TestBase {
         app.getBoardHelper().refreshPage();
         boolean isChangedBoardNamePresent = app.getBoardHelper().findWebElementByText(name);
         Assert.assertEquals(isChangedBoardNamePresent, true);
+        //
   }
 
 }

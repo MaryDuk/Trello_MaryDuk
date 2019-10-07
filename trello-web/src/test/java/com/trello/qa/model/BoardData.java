@@ -15,4 +15,11 @@ public class BoardData {
         this.boardTitle = boardTitle;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "BoardData{" +
+                "boardTitle='" + boardTitle + '\'' +
+                '}';
+    }
 }

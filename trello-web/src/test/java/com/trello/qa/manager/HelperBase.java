@@ -1,10 +1,12 @@
 package com.trello.qa.manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.io.File;
+import java.io.IOException;
 
 public class HelperBase {
 
@@ -88,5 +90,15 @@ public class HelperBase {
 
     public void waitForElementAndClick(By locator, int time) {
         new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
+    public void takeScreenShot(){
+        File tmp = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File screen = new File("src/test/resources/Screenshots/screen"+ System.currentTimeMillis()+".png"); // choose try catch
+        try {
+            Files.copy(tmp, screen);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

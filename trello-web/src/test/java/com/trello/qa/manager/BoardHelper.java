@@ -108,6 +108,7 @@ public class BoardHelper extends HelperBase{
        //click(By.xpath("//div[@class='boards-page-board-section mod-no-sidebar']//h3[contains(text(),'Personal Boards')]/ancestor::div[@class='boards-page-board-section mod-no-sidebar']//ul[@class='boards-page-board-section-list']//li"));
         new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@class='icon-lg icon-member']/../../..//li")));
         click(By.xpath("//*[@class='icon-lg icon-member']/../../..//li"));
+        takeScreenShot();
     }
 
     public void deleteBoardsInCycle () throws InterruptedException {

@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'qa21'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    implementation 'org.testng:testng:7.0.0'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    implementation 'io.appium:java-client:7.2.0'
+}
+//useTestNG()

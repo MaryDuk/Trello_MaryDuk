@@ -133,4 +133,8 @@ public class BoardHelper extends HelperBase{
         click(By.xpath("//span[@class='js-board-editing-target board-header-btn-text']"));
         typeByJavaScriptExecutorBoardName(By.xpath("//input[@class='board-name-input js-board-name-input']"), name);
     }
+//______________________________________________________
+    public void clickOnPlusButton() {
+        click(By.id("add_fab"));
+    }
 }

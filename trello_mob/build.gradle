@@ -17,4 +17,6 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'io.appium:java-client:7.2.0'
 }
-//useTestNG()
+test {
+useTestNG()
+}

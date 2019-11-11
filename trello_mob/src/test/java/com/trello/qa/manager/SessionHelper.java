@@ -14,6 +14,7 @@ public class SessionHelper extends HelperBase {
     type(By.id("user"),email);
     type(By.id("password"),password);
         click(By.id("authenticate"));
+        Thread.sleep(10000);
 
     }
 

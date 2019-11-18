@@ -46,7 +46,7 @@ public class ApplicationManager {
         sessionHelper = new SessionHelper(driver);
         userHelper = new UserHelper(driver);
 
-        sessionHelper.login("m.duksaite@gmail.com","trusty07");
+        //sessionHelper.login("m.duksaite@gmail.com","trusty07"); - to check swipe we do not have to login
     }
 
     public void stop() {

@@ -2,6 +2,8 @@ package com.trello.qa.manager;
 
 import com.google.common.io.Files;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -101,5 +103,24 @@ public class HelperBase {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void swipeLeft(By locator){
+        TouchAction touch = new TouchAction(driver);
+
+        WebElement element = driver.findElement(locator);
+        int leftX = element.getLocation().getX(); //get left point
+        int righttX = leftX + element.getSize().getWidth()-10; //get right point
+        int upperY = element.getLocation().getY();
+        int lowerY = upperY +  element.getSize().getHeight();
+        int middleY = (upperY+lowerY)/2;
+
+        touch.longPress(PointOption.point(righttX,middleY)).moveTo(PointOption.point(leftX,middleY)).release().perform();
+        //touch
+        //            .longPress(PointOption.point(rightX,middleY))
+        //            .moveTo(PointOption.point(leftX, middleY))
+        //            .release()
+        //            .perform();
+
     }
 }
